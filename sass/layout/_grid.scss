@@ -1,0 +1,61 @@
+// Construímos nuestro propio grid basado en floats. Esto es útil desde el punto de vista de navegadores antiguos, donde quizá no sean soportadas técnicas modernas como flexbox o grid-system
+
+.row {
+  // Si el viewport es menor usara el 100% pero si es mayor se limita a 1140px
+  max-width: $grid-width;
+  // background-color: lightgray;
+  margin: 0 auto;
+
+  // Usamos la pseudo clase :not() para especificar dónde no queremos que aplique el estilo, y le pasamos la pseudoclase correspondiente
+  // Básicamente estamos diciendo que no queremos margen inferior vertical en la última fila, pero si en todas las anteriores
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+  }
+
+  //Los elementos flotados deben incluir el mixin clearfix para ocupar su espacio en el árbol, de lo contrario, no tienen altura.
+  @include clearfix;
+
+  //Aqui usamos el selector por atributo. Funciona así, podría seleccionar los elementos que tuviesen src="img/logo.png", o alt="logo", pero lo hacemos para las clases que 'comienzan' por col- usando el símbolo ^ delante del operador igual y nos devuelve todas las concordancias de clase que empiecen con ese valor. TOP! => ^^^^ :) Si usamos el * nos devolvería las concordancias que 'contienen' ese valor. Si usamos $ pues las que 'ternimen' con el valor.
+  [class^="col-"] {
+    //Al flotar a la izquierda las columnas, deberemos usar el margin-right en cada una de ellas, salvo...
+    float: left;
+    //Aplicamos el margen a la derecha definido en la variable salvo a la última columna
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+  .col-1-of-2 {
+    // Al hacer uso de la fx calc (en la es posible usar distintas medidas), debemos encapsular las variables para que sean leídas #{...}
+    // Establecemos el ancho de esta columna como el total - el margen definido / dividido por 2 => col-lg-6 en bootstrap aprox.
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - (2 * #{$gutter-horizontal})) / 3);
+  }
+
+  .col-2-of-3 {
+    //Para esta columna, multiplicamos por 2 el valor de una de ellas y le sumamos un margen. Lo de la anterior pero * 2 + 1 margen
+    width: calc(
+      (2 * (100% - 2 * #{$gutter-horizontal}) / 3 + #{$gutter-horizontal})
+    );
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - (3 * #{$gutter-horizontal})) / 4);
+  }
+
+  .col-2-of-4 {
+    //* 2 el valor de una y le sumamos un margen
+    width: calc(
+      2 * ((100% - (3 * #{$gutter-horizontal})) / 4) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-3-of-4 {
+    //* 3 el valor de una y le sumamos dos márgenes
+    width: calc(
+      3 * ((100% - (3 * #{$gutter-horizontal})) / 4) + 2 * #{$gutter-horizontal}
+    );
+  }
+}

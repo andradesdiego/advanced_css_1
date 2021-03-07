@@ -1,0 +1,10 @@
+//Clearfix es una especie de convención usada para mostrar el alto y ocupar el espacio de elementos flotantes. Sin esta config el elemento no ocupa su espacio en el tree.
+//Las propiedades del clearfix se aplican sobre la pseudoclase ::after y son '' para content, ya que no mostramos nada, display table -como convención- y clear both ya que queremos que aplique a cualquier float, tanto left como right.
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

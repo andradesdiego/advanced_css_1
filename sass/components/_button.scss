@@ -1,0 +1,95 @@
+//Estilos de componente Button
+
+.btn {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    /* padding: 15px 40px; */
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    /* border-radius: 100px; */
+    border-radius: 10rem;
+    transition: all 0.2s;
+    /* ya que el estado hijo ::after es absoluto, el padre debe ser relative */
+    position: relative;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    /* transform: translateY(-3px); */
+    transform: translateY(-0.3rem);
+    /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    /* transform: translateY(-1px); */
+    transform: translateY(-0.1rem);
+    /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: white;
+    }
+  }
+
+  &::after {
+    /* Siempre es necesario establecer esta propiedad para que se muestre el estado ::after, aunque su valor sea vacío */
+    content: "";
+    /* Igual que anterior, es necesaria la propiedad display */
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    /* border-radius: 100px; */
+    border-radius: 10rem;
+    /* Necesario para que se muestre */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 1s;
+  }
+
+  &--animated {
+    animation: moveInBottom 1s ease-in-out 0.75s;
+    /* Usamos esta propiedad para conseguir que el botón no se muestre antes de la animación -->> magic */
+    animation-fill-mode: backwards;
+  }
+}
+
+.btn-text {
+  &:link,
+  &:visited {
+    font-size: $default-font-size;
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+    //Si la medida aplicada es inferior a 10px, el redondeo hace que la unidad rem no tenga efecto, por lo que podemos usar px; aunque rem funcionaría bien tambien.
+    border-bottom: 1px solid $color-primary;
+    padding: 3px;
+    transition: all 0.5s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.15);
+    transform: translate(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15);
+    transform: translateY(0);
+  }
+}
