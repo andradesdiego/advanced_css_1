@@ -1,0 +1,43 @@
+// En esta composición se trabaja el posicionamiento de imágenes. El elemento padre es relativo y sus hijos absolutos. A partir de ahí, con lefts, rights y tops definimos posición con respecto a su padre.
+
+.composition {
+  position: relative;
+  &__photo {
+    width: 55%;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+    border-radius: 2px;
+    position: absolute;
+    z-index: 10; //Establecemos un valor por defecto
+    transition: all 0.2s; //Para aplicar un transform siempre necesitamos el transition
+    outline-offset: 1rem; //Al usar el outline, podemos separarlo con el offset
+
+    &--p1 {
+      left: 0;
+      top: -1rem;
+    }
+
+    &--p2 {
+      right: 0;
+      top: 5rem;
+    }
+
+    &--p3 {
+      left: 15%;
+      top: 17rem;
+    }
+
+    &:hover {
+      outline: 0.1rem solid $color-primary; //Si usásemos border no podríamos separarlo. TOP! => ^^^ :)
+      transform: scale(1.05) translateY(-0.5rem); //Aumentamos y rotamos un poco
+      box-shadow: 0 2.5rem 4rem rgba($color-black, 0.5);
+      z-index: 20; // Superponemos el elemento
+    }
+  }
+
+  //Cuando hacemos hover sobre toda la composición, seleccionamos sólo las que no están hover ¿? ^^^ y reducimos un poco su tamaño. TOP => ^^^ :)
+  &:hover &__photo:not(:hover) {
+    transform: scale(0.95);
+  }
+  //En compilación se traduce a:
+  //composition:hover composition__photo:not(:hover) {}
+}

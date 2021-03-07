@@ -1,0 +1,25 @@
+//Estilos globales de proyecto
+
+//Reset de estilos
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* En lugar de definir border-box en el selector global, lo hacemos en el body, y aquí lo definimos inherit para otorgar el poder de la herencia, ya que se propaga a los elementos hijos. */
+  /* box-sizing: border-box; */
+  box-sizing: inherit;
+}
+
+html {
+  /* Regla global -> root font-size -> todos los rem se calculan desde aqui */
+  /* 1rem = 10px  nos interesa esta medida*/
+  /* font-size: 10px; */
+  /* Incluso mejor es definirla en % -> Dividimos 100 entre 16 = 62.5%*/
+  font-size: 62.5%; // No se incluye en typograghy ya que define lo que es 1rem de manera global
+}
+
+body {
+  /* El elemento global padre lo hereda con el valor inherit */
+  box-sizing: border-box;
+}

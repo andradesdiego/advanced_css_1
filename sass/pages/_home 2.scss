@@ -1,0 +1,35 @@
+.section-about {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0;
+  //Aplicamos un margen negativo para subir el contenido. Lo hacemos calculando el triangulo que deja el hearder abajo. Esto es, 95vh - 75vh que aplica la esquina del polígono usado ahí, el resultado es 20vh
+  // .header {
+  //   height: 95vh;
+  //   clip-path: polygon(0 0, 100% 0%, 100% 75vh, 0 100%);
+  // }
+  margin-top: -20vh;
+}
+
+.section-features {
+  padding: 20rem 0;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.801),
+      rgba($color-primary-dark, 0.801)
+    ),
+    url(../img/nat-4.jpg);
+  background-size: cover;
+
+  //Podríamos usar el poligon como en el header pero preferimos usar la técnica skew, transformando el elemento en su forma -7deg, obteniendo el mismo resultado que anteriormente.
+  transform: skewY(-7deg);
+  margin-top: -10rem;
+  //Al aplicar el skew a la sección para similar el polígono de fondo, debemos usarlo contrariamente a toda la fila. Para ellos usamos el selector global de los hijos (y sólo los hijos directos con > * ) con lo que seleccionamos el elemento .row completo, ya que es el único hijo directo de .section-features
+  & > * {
+    transform: skewY(7deg);
+  }
+}
+
+.section-tours {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0 50rem 0;
+  margin-top: -10rem;
+}
